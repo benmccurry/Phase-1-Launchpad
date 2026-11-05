@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phase 1 Launchpad v9</title>
+<title>Phase 1 Launchpad v10</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -346,6 +346,17 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
 .cq-notes{width:100%;resize:vertical;font-size:12.5px;line-height:1.55}
 .cq-foot{margin-top:22px;padding-top:12px;border-top:1px solid #e3e8ef;font-size:9.5px;line-height:1.55;color:#8493a8}
 @media (max-width:700px){ .cq{padding:24px 18px} .cq-top{flex-direction:column} .cq-meta{text-align:left} .cq-meta dl{justify-content:start} .cq-parties{grid-template-columns:1fr} .cq-order{display:block;overflow-x:auto} }
+table.t.mt td{vertical-align:top}
+.mt-meta{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.mt-note{font:500 11px/1.4 var(--sans);color:var(--slate);margin-top:5px}
+.mt-opt{display:flex;align-items:flex-start;gap:8px;padding:5px 8px;border-radius:7px;cursor:pointer;font-size:12.5px;line-height:1.35;margin-bottom:2px}
+.mt-opt:hover{background:var(--field)}
+.mt-opt.on{background:var(--teal-bg)}
+.mt-opt input{accent-color:var(--teal);margin-top:2px;flex:none}
+.mt-opt > span:first-of-type{flex:1;min-width:0}
+.mt-sc{font:700 10.5px/1 var(--mono);color:var(--muted);padding-top:3px}
+.mt-add{margin-top:4px}
+.mt-add .inp{height:32px;font-size:12px;max-width:340px}
 /* ---- review ---- */
 .rv-head{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--line-soft)}
 .rv-head h2{margin:0;font:800 20px/1.25 var(--disp)}
@@ -462,7 +473,7 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
   <form class="gate-card" id="loginForm" autocomplete="off" novalidate>
     <div class="gate-brand">
       <div class="lp-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></svg></div>
-      <div><h1>Phase1 Launchpad <span class="ver">v9</span></h1><small>Sales portal · QC volume &amp; product selection</small></div>
+      <div><h1>Phase1 Launchpad <span class="ver">v10</span></h1><small>Sales portal · QC volume &amp; product selection</small></div>
     </div>
     <h2>Sign in</h2>
     <p class="sub" id="loginSub">Sign in with your work Microsoft account, or use your Launchpad credentials.</p>
@@ -471,11 +482,11 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
     <div class="gate-note" id="msNote" hidden></div>
     <div class="or" id="loginOr"><span>or use your Launchpad login</span></div>
     <div id="localLogin">
-    <div class="fld"><label for="lgUser">Username</label><input class="inp" id="lgUser" autocomplete="username" spellcheck="false"></div>
+    <div class="fld"><label for="lgUser">Username</label><input class="inp" id="lgUser" autocomplete="username" spellcheck="false" autocapitalize="none" placeholder="e.g. bmccurry"></div>
     <div class="fld"><label for="lgPass">Password</label><input class="inp" id="lgPass" type="password" autocomplete="current-password"></div>
     <button class="btn primary block" type="submit" style="height:44px;margin-top:4px">Sign in</button>
     </div>
-    <div class="gate-foot">Access is limited to authorized LGC sales users.</div>
+    <div class="gate-foot">Access is limited to authorized sales users. Ask an admin if you need an account.</div>
   </form>
 </section>
 
@@ -486,7 +497,7 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
       <div class="lp-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div>
       <div><h1>Choose the instrument platform</h1><small>Signed in as <span id="gateUser">LGC</span> · <button type="button" id="gateSignOut" style="border:none;background:none;padding:0;color:var(--teal-deep);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer">Sign out</button></small></div>
     </div>
-    <p class="sub">Each platform loads its own TVC workbook: product list, analyte menus, vial sizes, stability and kit math. Enter that platform's password to unlock it.</p>
+    <p class="sub">Each platform loads its own TVC workbook: product list, analyte menus, vial sizes, stability and kit math. Enter that platform's password to unlock it. Your quotes and uploads are saved under your own username.</p>
     <div class="wb-grid" id="wbGrid"></div>
   </div>
 </section>
@@ -497,7 +508,7 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
   <div class="top-row">
     <div class="brand">
       <div class="lp-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></svg></div>
-      <div><b>Phase1 Launchpad <span class="ver">v9</span></b><small>Sales portal</small></div>
+      <div><b>Phase1 Launchpad <span class="ver">v10</span></b><small>Sales portal</small></div>
     </div>
     <div class="ctx">
       <div><span class="l">Workbook</span><span class="v" id="ctxWb">—</span></div>
@@ -514,6 +525,7 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
     <button class="tab" role="tab" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/></svg>Home</button>
     <button class="tab" role="tab" data-tab="tvc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2"/></svg>Total Volume Calculator<span class="num" id="tabKits">0</span></button>
     <button class="tab" role="tab" data-tab="uploads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Uploads<span class="num" id="tabUploads">0</span></button>
+    <button class="tab" role="tab" data-tab="users" id="tabUsersBtn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19"/><circle cx="10" cy="7.5" r="3.5"/><path d="M20 19v-1.5a3.5 3.5 0 0 0-2.5-3.35M15.5 4.2a3.5 3.5 0 0 1 0 6.6"/></svg>Users</button>
     <button class="tab" role="tab" data-tab="ua"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6.5L5.2 18a2 2 0 0 0 1.8 3h10a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M7.5 15h9"/></svg>Urinalysis Selector</button>
   </nav>
 </header>
@@ -602,14 +614,17 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
       <div class="grid2">
         <div>
           <div class="card" style="margin-bottom:16px">
-            <div class="card-h"><div class="grow"><h3>Load the customer's test menu</h3><div class="sub">Paste the analyte list (Heatmap export) or pick products by hand</div></div>
+            <div class="card-h"><div class="grow"><h3>Load the customer's test menu</h3><div class="sub">Paste the analyte list, review the suggested matches, then apply</div></div>
               <div class="seg" id="menuMode"><button class="active" data-m="paste" type="button">Paste analyte list</button><button data-m="pick" type="button">Pick products</button></div>
             </div>
             <div class="card-b" id="menuPaste">
-              <div class="fld"><label for="hmText">Analyte list · one per line</label><textarea class="inp" id="hmText" placeholder="Paste column A of the Assay Heat Map export, e.g.&#10;Sodium&#10;Potassium&#10;TSH&#10;Ferritin"></textarea></div>
+              <div class="fld"><label for="hmText">Analyte list · one per line · optional columns: Runs/day · Days/week · Instrument</label><textarea class="inp" id="hmText" placeholder="Paste from Excel (tab-separated) or type, e.g.&#10;Sodium&#9;3&#9;7&#9;Alinity ci&#10;ALB&#9;1&#9;5&#10;TSH&#10;Ferritin"></textarea></div>
               <div class="q-row"><div class="qt">Running CSF samples?<small>Uses CSF mappings when applicable (Glucose, Urine/CSF Protein)</small></div><div class="mc" data-q="csf"><button type="button" data-v="YES">Yes</button><button type="button" data-v="NO">No</button></div></div>
               <div class="q-row"><div class="qt">Running urine samples?<small>Uses urine mappings when applicable (Creatinine, Electrolytes, Microalbumin…)</small></div><div class="mc" data-q="urine"><button type="button" data-v="YES">Yes</button><button type="button" data-v="NO">No</button></div></div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn primary" id="hmRun" type="button">Generate heatmap</button><button class="btn" id="hmClear" type="button">Clear / reset</button></div>
+              <div class="q-row" data-fam="alb" hidden><div class="qt">Albumin method?<small>Picks ALBUMIN BCG / BCP (Abbott green / purple; Roche Gen.2 BCG / BCP)</small></div><div class="mc" data-q="alb"><button type="button" data-v="BCG">BCG</button><button type="button" data-v="BCP">BCP</button><button type="button" data-v="NS">Not sure</button></div></div>
+              <div class="q-row" data-fam="crea" hidden><div class="qt">Creatinine method?<small>Enzymatic vs Jaffé (standard). Urine creatinine is added too when running urine.</small></div><div class="mc" data-q="crea"><button type="button" data-v="ENZ">Enzymatic</button><button type="button" data-v="JAFFE">Jaffé</button><button type="button" data-v="NS">Not sure</button></div></div>
+              <div class="q-row" data-fam="alt" hidden><div class="qt">ALT and AST: activated or standard?<small>Activated = with P5P / PyP (Abbott A-ALT, A-AST)</small></div><div class="mc" data-q="enz"><button type="button" data-v="ACT">Activated</button><button type="button" data-v="STD">Standard</button><button type="button" data-v="NS">Not sure</button></div></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn primary" id="hmRun" type="button">Match analytes</button><button class="btn" id="hmClear" type="button">Clear / reset</button></div>
               <div id="hmOut"></div>
             </div>
             <div class="card-b" id="menuPick" hidden>
@@ -648,6 +663,29 @@ textarea.inp{height:150px;padding:11px 13px;font:500 12.5px/1.5 var(--mono);resi
       <button class="btn sm" id="upClear" type="button">Clear history</button></div>
     <div class="note info" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.5M12 11v5"/></svg><div><b>How re-uploads work.</b> Same customer name: each lab in the file replaces the lab with the same name (not case sensitive), new lab names are added, and labs not in the file are kept. Different customer name: the file starts a new customer quote; the previous one stays here so you can restore it.</div></div>
     <div id="upList"></div>
+  </section>
+
+  <!-- ================= USERS (admin) ================= -->
+  <section class="pane" id="pane-users">
+    <div class="head"><div><h1>Users</h1><div class="sub">Admins add, reset and remove Launchpad users here. Each user only sees their own quotes and uploads.</div></div>
+      <button class="btn sm primary" id="usrDownload" type="button">Download users.json</button></div>
+    <div id="usrBanner"></div>
+    <div class="grid2" style="grid-template-columns:minmax(0,1fr) 340px">
+      <div class="card"><div class="card-h"><div class="grow"><h3>Accounts</h3><div class="sub" id="usrSrc"></div></div></div><div class="tbl-wrap"><table class="t" id="usrTbl"></table></div></div>
+      <div>
+        <div class="card"><div class="card-h"><div class="grow"><h3>Add a user</h3><div class="sub">Usernames are not case sensitive</div></div></div>
+          <form class="card-b" id="usrForm" autocomplete="off">
+            <div class="fld"><label for="nuU">Username</label><input class="inp" id="nuU" placeholder="e.g. jsmith" spellcheck="false" autocapitalize="none"></div>
+            <div class="fld"><label for="nuN">Display name</label><input class="inp" id="nuN" placeholder="e.g. Jane Smith"></div>
+            <div class="fld"><label for="nuE">Work email (optional, for Microsoft sign-in)</label><input class="inp" id="nuE" type="email" placeholder="name@company.com"></div>
+            <div class="fld"><label for="nuP">Password</label><div style="display:flex;gap:6px"><input class="inp" id="nuP" spellcheck="false" autocapitalize="none"><button class="btn sm" type="button" id="nuGen" style="height:42px">Generate</button></div></div>
+            <div class="fld"><label for="nuR">Role</label><select class="inp" id="nuR"><option value="user">Sales rep</option><option value="admin">Admin (can manage users)</option></select></div>
+            <div class="gate-err" id="nuErr" hidden></div>
+            <button class="btn primary block" type="submit">Add user</button>
+          </form></div>
+        <div class="note info" style="margin-top:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.5M12 11v5"/></svg><div><b>Publishing changes.</b> Changes work right away in this browser. To make them work for everyone: <b>Download users.json</b>, then in GitHub use <b>Add file → Upload files</b> to put it next to <span class="mono">index.html</span> and commit. Live in about a minute.</div></div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= URINALYSIS ================= -->
@@ -991,7 +1029,11 @@ https://github.com/nodeca/pako/blob/main/LICENSE
    CONFIG
    ===================================================================== */
 // Access control is a client-side gate for Phase 1 (not a security boundary).
-var LOGIN = { user:'LGC', pass:'123' };
+/* Launchpad users. Built-in list below; when the site is hosted, a users.json file next to
+   index.html (downloaded from the Users tab) replaces it, so admins can add users without a new build.
+   Passwords are stored as salted SHA-256 hashes. This is an access gate, not a security boundary. */
+var BUILTIN_USERS = [{"u": "bmccurry", "name": "bmccurry", "role": "admin", "salt": "b4fde1c20011ec60", "hash": "6380952c946d3b780824c075fced060b13f626f874eddb0ab3223b4d7cd4fbf3", "email": ""}, {"u": "ccotreau", "name": "ccotreau", "role": "admin", "salt": "bfe4f072c6d69f4e", "hash": "cc620898b0cd2d07472873def222f8a67b1d891b4039d1ba8a1b96bc31f7843b", "email": ""}, {"u": "jpalumbo", "name": "jpalumbo", "role": "user", "salt": "5f6e728fbd00b8c2", "hash": "24c1e23b6567a53bedd23118fbc52436a9630dcdb93f4f53c1f946763726538e", "email": ""}, {"u": "jcrowell", "name": "jcrowell", "role": "user", "salt": "8731134691a8cb0c", "hash": "7b64c91b65abc8919c14140454eeaa8b9843bd06d36e66490971c3ab9a7b9d7f", "email": ""}];
+var USERS = BUILTIN_USERS.slice(), USERS_SRC = 'built-in';
 /* ---------------------------------------------------------------------
    MICROSOFT SSO (Entra ID) — fill these in from IT's app registration.
    App registration: platform "Single-page application", redirect URI =
@@ -1004,7 +1046,7 @@ var SSO_CONFIG = {
   allowLocalLogin: true,   // false = only Microsoft sign-in once SSO is configured
   allowedDomains: []       // optional, e.g. ['lgcgroup.com'] — reject other email domains
 };
-var USER = { name:'LGC', email:'', method:'local' };
+var USER = { u:'', name:'', email:'', role:'', method:'' };
 var WB_PASS = { roche:'456', abbott:'789' };
 var KB = JSON.parse(document.getElementById('kbData').textContent);
 var WB_META = {
@@ -1085,7 +1127,17 @@ function isElectrolyte(name){ return /\b(sodium|potassium|chloride)\b/i.test(nam
 function blankHeat(){ return { text:'', csf:null, urine:null, results:null, ran:null }; }
 function blankLab(name){ return { id:nid(), name:name||'', instruments:MFR?[{id:nid(), model:INSTRUMENTS[MFR][0].model, qty:1}]:[], prods:{}, heat:blankHeat() }; }
 function blankCustomer(){ var l=blankLab('Lab 1'); return { customer:'', labs:[l], active:l.id }; }
-function saveState(){ if(MFR&&C) store('p1lp.v8.'+MFR, C); }
+function saveState(){ if(MFR&&C&&USER.u) store(ukey(MFR), C); }
+/* one-time: data saved before v10 (shared login) is handed to the first user who opens that platform here */
+function claimLegacy(k){
+  var mine=load(ukey(k)); if(mine) return mine;
+  if(load('p1lp.v10.claimed.'+k)) return null;
+  var old=load('p1lp.v8.'+k);
+  if(!old){ var v1=load('p1lp.v1.'+k); if(v1){ old={ customer:v1.customer||'', labs:[{ id:nid(), name:v1.lab||'Lab 1', instruments:v1.instruments||[], prods:v1.prods||{}, heat:v1.heat||blankHeat() }] }; old.active=old.labs[0].id; } }
+  store('p1lp.v10.claimed.'+k,{by:USER.u,at:new Date().toISOString()});
+  if(old){ var up=load('p1lp.v8.uploads.'+k); if(up) store(ukey('uploads.'+k),up); var br=load('p1lp.brand'); if(br && !load(ukey('brand'))) store(ukey('brand'),br); log('Moved the quote saved before v10 into '+USER.u); }
+  return old;
+}
 function labName(l,i){ return (l&&l.name&&l.name.trim()) || ('Lab '+((i==null?C.labs.indexOf(l):i)+1)); }
 function labKey(n){ return String(n||'').trim().toLowerCase().replace(/\s+/g,' '); }
 function activeLab(){ return C.labs.filter(function(l){ return l.id===C.active; })[0] || C.labs[0]; }
@@ -1253,6 +1305,208 @@ function runHeatmap(){
 }
 
 /* =====================================================================
+   ANALYTE MATCHING (v10) — paste → review suggestions → apply
+   Sources, strongest first: workbook alias table (VBA heatmap logic),
+   method rules (Albumin BCG/BCP, Creatinine Enzymatic/Jaffé, ALT/AST
+   Activated/Standard), exact assay name, then fuzzy suggestions.
+   ===================================================================== */
+var SYN={ NA:'SODIUM', K:'POTASSIUM', CL:'CHLORIDE', GLU:'GLUCOSE', GLUC:'GLUCOSE', BUN:'UREANITROGEN', UN:'UREANITROGEN', TBIL:'BILIRUBINTOTAL', TBILI:'BILIRUBINTOTAL', DBIL:'BILIRUBINDIRECT', DBILI:'BILIRUBINDIRECT',
+  CHOL:'CHOLESTEROL', TRIG:'TRIGLYCERIDE', TG:'TRIGLYCERIDE', ALP:'ALKALINEPHOSPHATASE', ALKP:'ALKALINEPHOSPHATASE', CK:'CREATINEKINASE', CPK:'CREATINEKINASE', HBA1C:'HBA1C', HGBA1C:'HBA1C', A1C:'HBA1C', GHB:'HBA1C', FT4:'FREET4', FT3:'FREET3', TT4:'TOTALT4', TT3:'TOTALT3',
+  TNI:'TROPONIN', TROP:'TROPONIN', HSTNI:'TROPONIN', HSTROP:'TROPONIN', FERR:'FERRITIN', FE:'IRON', MG:'MAGNESIUM', CA:'CALCIUM', PHOS:'PHOSPHORUS', PHOSPHATE:'PHOSPHORUS', TP:'TOTALPROTEIN', AMY:'AMYLASE', LIP:'LIPASE', UA:'URICACID', URIC:'URICACID', LACT:'LACTATE', LA:'LACTATE',
+  CO2:'CO2', BICARB:'CO2', HCG:'HCG', BHCG:'HCG', VITD:'VITAMIND', VITB12:'B12', B12:'B12', HTSH:'TSH', MALB:'MICROALBUMIN', UALB:'MICROALBUMIN', DIG:'DIGOXIN', VANC:'VANCOMYCIN', GENT:'GENTAMICIN', TOBRA:'TOBRAMYCIN', PHENO:'PHENOBARBITAL', VALP:'VALPROIC', THEO:'THEOPHYLLINE', AMM:'AMMONIA', CRP:'CREACTIVEPROTEIN', HSCRP:'CREACTIVEPROTEIN', CRPHS:'CREACTIVEPROTEIN', PROBNP:'NTPROBNP', NTPBNP:'NTPROBNP', TNT:'TROPONINT', TNTHS:'TROPONINTHS', HSTNT:'TROPONINTHS', PCT:'PROCALCITONIN', VITAMIND:'VITAMIND', TESTO:'TESTOSTERONE', PROG:'PROGESTERONE', E2:'ESTRADIOL', PTH:'PTH', NH3:'AMMONIA', ETOH:'ETHANOL', ALC:'ETHANOL', SALI:'SALICYLATE', APAP:'ACETAMINOPHEN' };
+var VENDOR_PREFIX=/^(ELECSYS|IONIFY|ISE|TINAQUANT|CEDIA|ONLINE|ARCHITECT|ALINITY)/;
+function core(n){ return String(n||'').replace(VENDOR_PREFIX,''); }
+var FAMILY_IN={ alb:/^(ALB|ALBUMIN|ALBUMN|ALB2|SERUMALBUMIN|ALBUMINSERUM)(BCG|BCP|GREEN|PURPLE|GEN2)?$/, crea:/^(CREA|CREAT|CREATININE|CRE|CREATININESERUM|SCR)(ENZ|ENZYMATIC|JAFFE|JAFF|PLUS|STD|STANDARD)?$/, alt:/^(A?ALT|ALTL|ALAT|S?GPT|ALANINEAMINOTRANSFERASE)(ACT|ACTIVATED|PYP|P5P|STD|STANDARD)?$/, ast:/^(A?AST|ASTL|ASAT|S?GOT|ASPARTATEAMINOTRANSFERASE)(ACT|ACTIVATED|PYP|P5P|STD|STANDARD)?$/ };
+var FAMILY_AS={ alb:function(a){ return /ALBUMI?N/.test(a) && !/PREALB|MICROALB/.test(a); }, crea:function(a){ return /CREATININE/.test(a); },
+  alt:function(a){ return a==='ALT'||a==='AALT'||/ALANINEAMINOTRANSFERASE/.test(a); }, ast:function(a){ return a==='AST'||a==='AAST'||/ASPARTATEAMINOTRANSFERASE/.test(a); } };
+function methodOf(fam,a){
+  if(fam==='alb') return /BCP|PURPLE/.test(a)?'BCP':'BCG';
+  if(fam==='crea') return /ENZ|PLUS/.test(a)?'ENZ':'JAFFE';
+  if(/^A(ALT|AST)$/.test(a)||/WITHPYP/.test(a)) return 'ACT';
+  if(/IFCC/.test(a)) return 'IFCC';
+  return 'STD';
+}
+var METHOD_LABEL={ BCG:'BCG (green)', BCP:'BCP (purple)', ENZ:'Enzymatic', JAFFE:'Jaffé (standard)', ACT:'Activated (with P5P)', STD:'Standard (no P5P)', IFCC:'IFCC' };
+function familyOf(n){ for(var f in FAMILY_IN){ if(FAMILY_IN[f].test(n)) return f; } return null; }
+function explicitMethod(fam,n){
+  if(fam==='alb'){ if(/BCP|PURPLE/.test(n)) return 'BCP'; if(/BCG|GREEN/.test(n)) return 'BCG'; }
+  if(fam==='crea'){ if(/ENZ|PLUS/.test(n)) return 'ENZ'; if(/JAFF|STD|STANDARD/.test(n)) return 'JAFFE'; }
+  if(fam==='alt'||fam==='ast'){ if(/^A(ALT|AST)|ACT|PYP|P5P/.test(n)) return 'ACT'; if(/STD|STANDARD/.test(n)) return 'STD'; }
+  return null;
+}
+function assayIndex(){
+  var out=[];
+  products().forEach(function(p){ if(issueOf(p)) return; sheetOf(p).an.forEach(function(a){ out.push({pid:p.id, sheet:p.sheet, row:a[0], assay:a[4], norm:normKey(a[4]), pn:p.name, vol:a[2], grp:a[3]}); }); });
+  return out;
+}
+function sampleOk(sheet,h){ if(/_U_Volumes$/.test(sheet)) return h.urine==='YES'; if(/CSF/.test(sheet)) return h.csf==='YES'; return true; }
+function bigrams(s){ var o={}; for(var i=0;i<s.length-1;i++){ var g=s.substr(i,2); o[g]=(o[g]||0)+1; } return o; }
+function dice(a,b){ if(a===b) return 1; if(a.length<2||b.length<2) return 0; var A=bigrams(a), B=bigrams(b), n=0, t=0, k; for(k in A){ t+=A[k]; if(B[k]) n+=Math.min(A[k],B[k]); } for(k in B) t+=B[k]; return 2*n/t; }
+function simScore(q,a){
+  if(!q||!a) return 0;
+  var c=core(a); if(c!==a && c){ var s2=simScore0(q,c); return Math.max(simScore0(q,a), s2>=1?0.99:s2); }
+  return simScore0(q,a);
+}
+function simScore0(q,a){
+  if(!q||!a) return 0;
+  if(q===a) return 1;
+  if(q.length>=3 && a.indexOf(q)===0) return Math.min(0.95, 0.8+0.15*q.length/a.length);
+  if(q.length>=3 && a.indexOf(q)>=0) return 0.7+0.2*q.length/a.length;
+  if(a.length>=4 && q.indexOf(a)>=0) return 0.72;
+  return dice(q,a)*0.85;
+}
+function parsePaste(text){
+  var lines=String(text||'').split(/\r?\n/).map(function(l){ return l.replace(/\s+$/,''); }).filter(function(l){ return l.trim(); });
+  var map={name:0,runs:1,days:2,inst:3}, rows=[];
+  function split(l){ if(l.indexOf('\t')>=0) return l.split('\t'); if(/[|;]/.test(l)) return l.split(/[|;]/); var c=l.split(','); if(c.length>1 && c.slice(1).some(function(x){ return /^\s*\d+(\.\d+)?\s*$/.test(x); })) return c; return [l]; }
+  lines.forEach(function(l,i){
+    var c=split(l).map(function(x){ return x.trim(); });
+    if(i===0 && /^(analyte|assay|test|name|analyte name|test name)s?$/i.test(c[0]) ){ // header row: learn column order
+      c.forEach(function(h,j){ var k=h.toLowerCase(); if(/run|per day|\/day|qty|quantity|count/.test(k)) map.runs=j; else if(/week|freq|days/.test(k)) map.days=j; else if(/instr|analy[sz]er|model|platform|system/.test(k)) map.inst=j; else if(j===0) map.name=0; });
+      return;
+    }
+    var nm=c[map.name]||''; if(!nm) return;
+    var runs=parseFloat(c[map.runs]), days=parseFloat(c[map.days]), inst=c[map.inst]||'';
+    rows.push({ input:nm, runs:isNaN(runs)?null:runs, days:isNaN(days)?null:Math.max(1,Math.min(7,Math.round(days))), inst:inst });
+  });
+  return rows;
+}
+function familiesIn(text){ var f={}; parsePaste(text).forEach(function(r){ var fam=familyOf(normKey(r.input)); if(fam) f[fam==='ast'?'alt':fam]=1; }); return f; }
+function buildMatchReview(){
+  var h=S.heat, parsed=parsePaste(h.text);
+  if(!parsed.length){ toast('Paste at least one analyte'); return; }
+  var idx=assayIndex(), bySheet={}; products().forEach(function(p){ if(!bySheet[p.sheet] && !issueOf(p)) bySheet[p.sheet]=p; });
+  var SPLUS='MultiCHEM_S_Plus-Assayed_Volume', USHEET='MultiCHEM_U_Volumes';
+  function opt(a,src,score,on,note){ return {pid:a.pid, row:a.row, assay:a.assay, pn:a.pn, vol:a.vol, src:src, score:Math.round(score*100), on:!!on, note:note||''}; }
+  function firstIn(sheet,test){ for(var i=0;i<idx.length;i++){ var a=idx[i]; if(a.sheet===sheet && test(a.norm)) return a; } return null; }
+  var rows=parsed.map(function(pr){
+    var n=normKey(pr.input), r={input:pr.input, runs:pr.runs, days:pr.days, inst:pr.inst, opts:[], status:'none', note:''};
+    if(!n) return r;
+    function add(o){ if(!r.opts.some(function(x){ return x.pid===o.pid && (x.row===o.row || normKey(x.assay)===normKey(o.assay)); })) r.opts.push(o); }   // same assay name in the same product shows once
+    /* 1. method families */
+    var fam=familyOf(n);
+    if(fam){
+      var want=explicitMethod(fam,n) || (fam==='alb'?h.alb:fam==='crea'?h.crea:h.enz);
+      var explicitTag={BCG:/BCG|GREEN/,BCP:/BCP|PURPLE/,ENZ:/ENZ|PLUS/,JAFFE:/JAFF/,ACT:/^A(ALT|AST)$|WITHPYP/,STD:/^(ALT|AST)$|WITHOUTPYP/};
+      var cands=idx.filter(function(a){ return FAMILY_AS[fam](a.norm) && sampleOk(a.sheet,h); })
+        .sort(function(x,y){ var t=want&&explicitTag[want]; return (t?((t.test(y.norm)?1:0)-(t.test(x.norm)?1:0)):0) || (/STAT/.test(x.norm)?1:0)-(/STAT/.test(y.norm)?1:0); });
+      var picked={};
+      // primary: S Plus; for creatinine also urine product when running urine
+      [SPLUS].concat(fam==='crea' && h.urine==='YES' ? [USHEET] : []).forEach(function(sh){
+        var hit=null; if(want && want!=='NS') hit=cands.filter(function(a){ return a.sheet===sh && methodOf(fam,a.norm)===want; })[0];
+        if(hit){ picked[hit.pid+'|'+hit.row]=1; add(opt(hit,'method',1,true,METHOD_LABEL[want])); }
+      });
+      cands.forEach(function(a){ var m=methodOf(fam,a.norm); add(opt(a,'method',m===want?0.9:0.6,false,METHOD_LABEL[m])); });
+      r.opts=r.opts.filter(function(o){ return o.on; }).concat(r.opts.filter(function(o){ return !o.on; }).sort(function(x,y){ return y.score-x.score; }).slice(0,5));
+      r.status = r.opts.some(function(o){ return o.on; }) ? 'method' : (cands.length?'review':'none');
+      r.note = want && want!=='NS' ? 'Method: '+METHOD_LABEL[want] : 'Method not chosen — tick the right one';
+      return r;
+    }
+    /* 2. workbook alias table (same logic as the Excel heatmap macro) */
+    var skipped=false;
+    wb().aliases.forEach(function(al){
+      if(n!==normKey(al[0]) && n!==normKey(al[1])) return;
+      var rule=String(al[4]||'').toUpperCase().trim();
+      if((rule==='CSF_MODE'&&h.csf!=='YES')||(rule==='URINE_MODE'&&h.urine!=='YES')){ skipped=true; return; }
+      var target=normKey(al[2]);
+      var sheets=al[3]?[al[3]]:Object.keys(bySheet);
+      sheets.forEach(function(sn){ if(!sampleOk(sn,h)) { skipped=true; return; } var a=firstIn(sn,function(x){ return x===target; }); if(!a) return;
+        var already=r.opts.some(function(o){ return o.on && o.pid===a.pid; });   // one assay per product per pasted line
+        add(opt(a,'alias',1,!already,already?'Variant (not ticked, avoids double counting)':'Workbook alias')); });
+    });
+    if(r.opts.length){ r.status='alias'; return r; }
+    /* 3. exact assay name (with abbreviations) */
+    var q=SYN[n]||n;
+    var exact=idx.filter(function(a){ var c=core(a.norm); return (a.norm===n||a.norm===q||c===n||c===q) && sampleOk(a.sheet,h); }), seen={};
+    exact.forEach(function(a){ if(seen[a.sheet]) return; seen[a.sheet]=1; add(opt(a,'name',1,true,'Same name')); });
+    if(r.opts.length){ r.status='name'; return r; }
+    /* 4. fuzzy suggestions: assay names and alias names */
+    var sc=[];
+    idx.forEach(function(a){ if(!sampleOk(a.sheet,h)) return; var s=Math.max(simScore(q,a.norm), q!==n?simScore(n,a.norm):0); if(s>=0.45) sc.push({a:a,s:s}); });
+    wb().aliases.forEach(function(al){ var s=Math.max(simScore(q,normKey(al[0])),simScore(q,normKey(al[1]))); if(s<0.6) return; var target=normKey(al[2]); (al[3]?[al[3]]:Object.keys(bySheet)).forEach(function(sn){ var a=firstIn(sn,function(x){ return x===target; }); if(a && sampleOk(a.sheet,h)) sc.push({a:a,s:s*0.97,alias:al[0]}); }); });
+    sc.sort(function(x,y){ return y.s-x.s; });
+    var top=sc[0];
+    sc.slice(0,8).forEach(function(x){ add(opt(x.a,'fuzzy',x.s,false,x.alias?'Like alias "'+x.alias+'"':'')); });
+    r.opts=r.opts.slice(0,6);
+    // tick the best match in each product when it is strong and clearly ahead of the next one in that product
+    if(top && top.s>=0.84){
+      var bestPer={};
+      sc.forEach(function(x){ var b=bestPer[x.a.sheet]; if(!b) bestPer[x.a.sheet]={first:x}; else if(!b.second && x.a.norm!==b.first.a.norm) b.second=x; });
+      Object.keys(bestPer).forEach(function(sh){ var b=bestPer[sh]; if(b.first.s>=top.s-0.03 && b.first.s>=0.84 && (!b.second || b.second.s<b.first.s-0.05)){ r.opts.forEach(function(o){ if(o.pid===b.first.a.pid && o.row===b.first.a.row) o.on=true; }); } });
+    }
+    r.status = r.opts.some(function(o){ return o.on; }) ? 'suggested' : (r.opts.length?'review':'none');
+    if(skipped && !r.opts.length){ r.status='skipped'; r.note='Urine/CSF assay — answered No'; }
+    return r;
+  });
+  h.review={ ran:new Date().toISOString(), rows:rows, applied:null };
+  UI.mFilter='attention'; if(!rows.some(needsAttention)) UI.mFilter='all';
+  saveState(); renderMatch();
+  var c=matchCounts(rows);
+  toast(rows.length+' analytes read · '+(c.alias+c.name+c.method+c.suggested)+' matched · '+c.review+' to review');
+}
+function needsAttention(r){ return r.status==='review'||r.status==='none'||r.status==='suggested'||(r.status==='method'&&!r.opts.some(function(o){ return o.on; })); }
+function matchCounts(rows){ var c={alias:0,name:0,method:0,suggested:0,review:0,none:0,skipped:0}; rows.forEach(function(r){ c[r.status]=(c[r.status]||0)+1; }); return c; }
+var MSTAT={ alias:['Workbook alias','green'], name:['Exact name','green'], method:['Method rule','teal'], suggested:['Suggested','amber'], review:['Needs review','amber'], none:['Not found','red'], skipped:['Skipped (urine/CSF)','']};
+function renderMatch(){
+  var R=S.heat.review; if(!R){ $('#hmOut').innerHTML=''; return; }
+  var rows=R.rows, c=matchCounts(rows), f=UI.mFilter||'all';
+  var list=rows.map(function(r,i){ return {r:r,i:i}; }).filter(function(x){ return f==='all' || (f==='attention'?needsAttention(x.r):x.r.status===f); });
+  var ticked=rows.reduce(function(t,r){ return t+r.opts.filter(function(o){ return o.on; }).length; },0);
+  var h='<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft)"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><div class="eyebrow" style="flex:1">Review matches · '+rows.length+' pasted analytes · '+new Date(R.ran).toLocaleString()+(R.applied?' · <span style="color:var(--green)">applied '+new Date(R.applied).toLocaleTimeString()+'</span>':'')+'</div></div>';
+  h+='<div class="hm-sum"><button type="button" class="chip '+(f==='all'?'on':'')+'" data-mf="all">All '+rows.length+'</button><button type="button" class="chip amber '+(f==='attention'?'on':'')+'" data-mf="attention"><span class="dot"></span>Check these '+rows.filter(needsAttention).length+'</button>'+
+    Object.keys(MSTAT).map(function(k){ return c[k]?'<button type="button" class="chip '+MSTAT[k][1]+' '+(f===k?'on':'')+'" data-mf="'+k+'"><span class="dot"></span>'+MSTAT[k][0]+' '+c[k]+'</button>':''; }).join('')+'</div>';
+  h+='<div class="an-wrap mt-wrap" style="max-height:460px"><table class="t mt"><thead><tr><th style="width:24%">Pasted</th><th style="width:14%">Status</th><th>Assays to set to Y (tick the right ones)</th></tr></thead><tbody>'+
+    (list.length?list.map(function(x){ var r=x.r, st=MSTAT[r.status]||['',''];
+      var meta=[r.runs!=null?r.runs+'×/day':'', r.days!=null?r.days+' d/wk':'', r.inst?esc(r.inst):''].filter(Boolean);
+      return '<tr data-mr="'+x.i+'"><td><b>'+esc(r.input)+'</b>'+(meta.length?'<div class="mt-meta">'+meta.map(function(m){ return '<span class="chip">'+m+'</span>'; }).join('')+'</div>':'')+'</td>'+
+        '<td><span class="chip '+st[1]+'">'+st[0]+'</span>'+(r.note?'<div class="mt-note">'+esc(r.note)+'</div>':'')+'</td>'+
+        '<td>'+(r.opts.length?r.opts.map(function(o,j){ return '<label class="mt-opt'+(o.on?' on':'')+'"><input type="checkbox" data-mo="'+j+'" '+(o.on?'checked':'')+'><span><b>'+esc(o.assay)+'</b> <span class="muted">· '+esc(o.pn)+' · '+esc(o.vol)+' µL'+(o.note?' · '+esc(o.note):'')+'</span></span>'+(o.src==='fuzzy'?'<span class="mt-sc">'+o.score+'%</span>':'')+'</label>'; }).join(''):'<span class="muted">No close match in the '+WB_META[MFR].label+' workbook.</span>')+
+        '<div class="mt-add"><input class="inp" list="assayList" data-madd placeholder="+ Find another assay…" aria-label="Find another assay for '+esc(r.input)+'"></div></td></tr>'; }).join(''):'<tr><td colspan="3" class="muted">Nothing in this filter.</td></tr>')+'</tbody></table></div>';
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px"><button class="btn primary" type="button" id="mApply">Apply to products ('+ticked+' assays)</button><span class="muted" style="font-size:12px">Sets ticked assays to Y and everything else to N, puts matching products in the quote, and uses any runs/day, days/week and instrument columns.</span></div>';
+  if(R.applyNotes&&R.applyNotes.length) h+='<div class="note" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><div><b>Notes from the last apply</b><ul class="imp-list">'+R.applyNotes.slice(0,10).map(function(n){ return '<li>'+esc(n)+'</li>'; }).join('')+'</ul></div></div>';
+  $('#hmOut').innerHTML=h+'</div>';
+  if(!document.getElementById('assayList')){ var dl=document.createElement('datalist'); dl.id='assayList'; document.body.appendChild(dl); }
+  $('#assayList').innerHTML=assayIndex().map(function(a){ return '<option value="'+esc(a.assay+' — '+a.pn)+'"></option>'; }).join('');
+}
+function resolveInst(text){
+  var t=normKey(text); if(!t) return [];
+  var hits=S.instruments.filter(function(r){ var m=normKey(r.model); return m.indexOf(t)>=0 || (t.length>=4 && t.indexOf(m.replace(/SERIES$/,''))>=0); });
+  if(!hits.length){ var tok=String(text).toUpperCase().match(/[A-Z]*\d{3,5}|CI|C|I/g)||[]; hits=S.instruments.filter(function(r){ var m=normKey(r.model); return tok.some(function(x){ return x.length>=3 && m.indexOf(x)>=0; }); }); }
+  return hits;
+}
+function applyMatchReview(){
+  var R=S.heat.review; if(!R) return;
+  var notes=[], perProd={};
+  products().forEach(function(p){ var st=pstate(p); sheetOf(p).an.forEach(function(r){ st.yn[r[0]]='N'; }); st.inQuote=false; });
+  R.rows.forEach(function(r){
+    r.opts.filter(function(o){ return o.on; }).forEach(function(o){
+      var p=prodById(o.pid); if(!p) return; var st=pstate(p); st.yn[o.row]='Y';
+      var pp=perProd[o.pid]||(perProd[o.pid]={days:[],inst:{},instAny:false,unres:{}});
+      if(r.runs!=null){ var base=+st.cfg.P17||1; st.add[o.row]=Math.max(0,Math.min(12,Math.round(r.runs)-base)); }
+      if(r.days!=null) pp.days.push(r.days);
+      if(!r.inst) pp.instMissing=true;
+      if(r.inst){ String(r.inst).split(/\s*[\/+&]\s*|\s*,\s*/).forEach(function(part){ if(!part) return; pp.instAny=true; var hits=resolveInst(part); if(hits.length) hits.forEach(function(h){ pp.inst[h.id]=1; }); else pp.unres[part]=1; }); }
+    });
+  });
+  var added=0;
+  Object.keys(perProd).forEach(function(pid){
+    var p=prodById(pid), st=pstate(p), pp=perProd[pid]; st.inQuote=true; added++;
+    if(pp.days.length){ var d=Math.max.apply(null,pp.days); if(d!==+st.cfg.Q17){ st.cfg.Q17=d; notes.push(p.name+': days/week set to '+d+' (highest pasted for its analytes).'); } }
+    if(pp.instAny && pp.instMissing){ notes.push(p.name+': some analytes have no instrument in the paste, so its instrument groups stay automatic.'); }
+    else if(pp.instAny && Object.keys(pp.inst).length){ st.assign={}; S.instruments.forEach(function(r){ if(+r.qty>0) st.assign[r.id]=pp.inst[r.id]?(+r.qty):0; }); notes.push(p.name+': instrument groups set from the pasted instrument column ('+S.instruments.filter(function(r){ return pp.inst[r.id]; }).map(function(r){ return r.model; }).join(', ')+').'); }
+    Object.keys(pp.unres).forEach(function(u){ notes.push(p.name+': instrument "'+u+'" is not on this lab\'s roster. Add it in Step 1, or it\'s ignored.'); });
+    if(!groupsFor(p).some(function(g){ return g.qty>0; })) notes.push(p.name+': no instrument on the roster runs its menu — assign one in its Instrument groups.');
+  });
+  var miss=R.rows.filter(function(r){ return !r.opts.some(function(o){ return o.on; }) && r.status!=='skipped'; });
+  if(miss.length) notes.push(miss.length+' pasted analyte'+(miss.length===1?' has':'s have')+' nothing ticked: '+miss.slice(0,8).map(function(r){ return r.input; }).join(', ')+(miss.length>8?'…':'')+'.');
+  S.heat.results=R.rows.map(function(r){ return {input:r.input, status:r.status, mapped:r.opts.filter(function(o){ return o.on; }).map(function(o){ return {pid:o.pid,pn:o.pn,assay:o.assay}; })}; });
+  S.heat.ran=R.ran; R.applied=new Date().toISOString(); R.applyNotes=notes;
+  log('Applied analyte matches: '+added+' products in quote for '+labName(S));
+  saveState(); UI.pFilter='quote'; renderStep2();
+  toast(added+' product'+(added===1?'':'s')+' in the quote'+(notes.length?' · see notes':''));
+}
+
+/* =====================================================================
    RENDER — shell
    ===================================================================== */
 function showGate(which){
@@ -1278,12 +1532,10 @@ function renderWbGate(pre){
 }
 function openWorkbook(k){
   MFR=k; sstore('p1lp.wb',k);
-  C=load('p1lp.v8.'+k);
-  if(!C){ var old=load('p1lp.v1.'+k);   // migrate single-lab state from earlier versions
-    if(old){ C={ customer:old.customer||'', labs:[{ id:nid(), name:old.lab||'Lab 1', instruments:old.instruments||[], prods:old.prods||{}, heat:old.heat||blankHeat() }] }; C.active=C.labs[0].id; } }
+  C=claimLegacy(k);
   C=normalizeCustomer(C); S=activeLab();
   if(!S.instruments.length) S.instruments=[{id:nid(), model:INSTRUMENTS[k][0].model, qty:1}];
-  UPLOADS=load('p1lp.v8.uploads.'+k)||[]; UI.rvScope='all'; UI.importReport=null;
+  UPLOADS=load(ukey('uploads.'+k))||[]; UI.rvScope='all'; UI.importReport=null;
   sheetCache={};
   log('Unlocked '+WB_META[k].label+' workbook');
   $('#ctxWb').textContent=WB_META[k].label+' · TVC v16 OCT2026';
@@ -1300,6 +1552,7 @@ function setTab(t){
   if(t==='tvc') renderTVC();
   if(t==='ua') UA.render();
   if(t==='uploads') renderUploads();
+  if(t==='users'){ if(!isAdmin()){ setTab('home'); return; } renderUsers(); }
   if(t!=='tvc') document.body.classList.remove('print-cq');
   window.scrollTo(0,0);
 }
@@ -1385,7 +1638,8 @@ function renderStep2(){
   $('#menuPaste').hidden=UI.menuMode!=='paste'; $('#menuPick').hidden=UI.menuMode!=='pick';
   $('#hmText').value=S.heat.text||'';
   $$('.mc').forEach(function(g){ var v=S.heat[g.dataset.q]; $$('button',g).forEach(function(b){ b.classList.toggle('on', b.dataset.v===v); }); });
-  renderHeatOut();
+  showFamilyQs();
+  if(S.heat.review) renderMatch(); else renderHeatOut();
   $$('#pFilter button').forEach(function(b){ b.classList.toggle('active', b.dataset.f===UI.pFilter); });
   renderPlist(); renderCart();
 }
@@ -1535,8 +1789,8 @@ function labSections(lab, idx, showTitle){
   });
 }
 /* ---------- customer-facing quote (v9) ---------- */
-function brand(){ var b=load('p1lp.brand')||{}; return { company:b.company||'', phone:b.phone||'', logo:b.logo||'' }; }
-function saveBrand(b){ store('p1lp.brand',b); }
+function brand(){ var b=load(ukey('brand'))||{}; return { company:b.company||'', phone:b.phone||'', logo:b.logo||'' }; }
+function saveBrand(b){ store(ukey('brand'),b); }
 function quoteMeta(){
   if(!C.quote) C.quote={};
   var q=C.quote, d=new Date();
@@ -1655,6 +1909,90 @@ function copyText(t){
 /* =====================================================================
    EVENTS
    ===================================================================== */
+/* ---------------- users ---------------- */
+function sha256(str){
+  function rr(n,x){ return (x>>>n)|(x<<(32-n)); }
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  var bytes=unescape(encodeURIComponent(str)), l=bytes.length, words=[], i;
+  for(i=0;i<l;i++) words[i>>2]|=(bytes.charCodeAt(i)&0xff)<<(24-(i%4)*8);
+  words[l>>2]|=0x80<<(24-(l%4)*8); words[(((l+8)>>6)+1)*16-1]=l*8;
+  for(var j=0;j<words.length;j+=16){
+    var w=[], a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+    for(i=0;i<64;i++){
+      if(i<16) w[i]=words[j+i]|0; else { var s0=rr(7,w[i-15])^rr(18,w[i-15])^(w[i-15]>>>3), s1=rr(17,w[i-2])^rr(19,w[i-2])^(w[i-2]>>>10); w[i]=(w[i-16]+s0+w[i-7]+s1)|0; }
+      var t1=(h+(rr(6,e)^rr(11,e)^rr(25,e))+((e&f)^(~e&g))+K[i]+w[i])|0, t2=((rr(2,a)^rr(13,a)^rr(22,a))+((a&b)^(a&c)^(b&c)))|0;
+      h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0;
+    }
+    H=[(H[0]+a)|0,(H[1]+b)|0,(H[2]+c)|0,(H[3]+d)|0,(H[4]+e)|0,(H[5]+f)|0,(H[6]+g)|0,(H[7]+h)|0];
+  }
+  return H.map(function(x){ return ('00000000'+(x>>>0).toString(16)).slice(-8); }).join('');
+}
+function userHash(salt,pw){ return sha256(salt+':'+pw); }
+function newSalt(){ var a=''; for(var i=0;i<16;i++) a+='0123456789abcdef'[Math.floor(Math.random()*16)]; return a; }
+function findUser(u){ u=String(u||'').trim().toLowerCase(); return USERS.filter(function(x){ return x.u.toLowerCase()===u && !x.disabled; })[0]||null; }
+function isAdmin(){ return USER && USER.role==='admin'; }
+function ukey(k){ return 'p1lp.v10.'+(USER.u||'anon')+'.'+k; }
+/* pending admin edits (this browser) override the published list until users.json is uploaded */
+function pendingUsers(){ return load('p1lp.v10.users.pending'); }
+function applyUserSources(published){
+  if(published){ USERS=published; USERS_SRC='users.json'; }
+  var pend=pendingUsers();
+  if(pend){ if(JSON.stringify(pend)===JSON.stringify(USERS)){ try{ localStorage.removeItem('p1lp.v10.users.pending'); }catch(_){ } } else { USERS=pend; USERS_SRC='pending'; } }
+}
+function loadPublishedUsers(){
+  if(!/^https?:$/.test(location.protocol)) { applyUserSources(null); return Promise.resolve(); }
+  return fetch('users.json?ts='+Date.now(),{cache:'no-store'}).then(function(r){ return r.ok?r.json():null; }).then(function(j){
+    var list=j&&Array.isArray(j.users)?j.users.filter(function(x){ return x&&x.u&&x.salt&&x.hash; }):null;
+    applyUserSources(list&&list.length?list:null);
+  }).catch(function(){ applyUserSources(null); });
+}
+
+/* ---------------- Users tab (admins) ---------------- */
+function paintAdmin(){ var b=document.getElementById('tabUsersBtn'); if(b) b.hidden=!isAdmin(); }
+function savePending(list){ USERS=list; USERS_SRC='pending'; store('p1lp.v10.users.pending',list); }
+function renderUsers(){
+  var admins=USERS.filter(function(x){ return x.role==='admin'&&!x.disabled; }).length;
+  $('#usrSrc').textContent=USERS.length+' users · source: '+(USERS_SRC==='pending'?'unpublished changes in this browser':USERS_SRC==='users.json'?'users.json on the site':'built into this file');
+  $('#usrBanner').innerHTML=USERS_SRC==='pending'?'<div class="note" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><div><b>Unpublished changes.</b> These users only work in this browser until you download users.json and upload it to the GitHub repo. <button class="btn sm" type="button" data-usr="discard" style="margin-left:6px">Discard changes</button></div></div>':'';
+  $('#usrTbl').innerHTML='<thead><tr><th>Username</th><th>Display name</th><th>Email</th><th>Role</th><th>Status</th><th></th></tr></thead><tbody>'+
+    USERS.map(function(x){ var me=x.u===USER.u;
+      return '<tr class="'+(x.disabled?'off':'')+'" data-uu="'+esc(x.u)+'"><td class="code">'+esc(x.u)+(me?' <span class="chip teal">you</span>':'')+'</td><td>'+esc(x.name||'')+'</td><td>'+esc(x.email||'')+'</td>'+
+        '<td><span class="chip '+(x.role==='admin'?'violet':'')+'">'+(x.role==='admin'?'Admin':'Sales rep')+'</span></td><td>'+(x.disabled?'<span class="chip red">Disabled</span>':'<span class="chip green">Active</span>')+'</td>'+
+        '<td style="white-space:nowrap"><button class="btn sm" type="button" data-usr="reset">Reset password</button> '+
+        (me?'':'<button class="btn sm" type="button" data-usr="role">'+(x.role==='admin'?'Make rep':'Make admin')+'</button> <button class="btn sm" type="button" data-usr="toggle">'+(x.disabled?'Enable':'Disable')+'</button> <button class="btn sm ghost" type="button" data-usr="remove">Remove</button>')+'</td></tr>'; }).join('')+'</tbody>';
+}
+function genPw(){ var w=['jags','vols','mem','nd','orl','atl','tpa','clt','bna','msy','aus','den'], n=Math.floor(100+Math.random()*900); return w[Math.floor(Math.random()*w.length)]+n; }
+function cloneUsers(){ return JSON.parse(JSON.stringify(USERS)); }
+$('#nuGen').addEventListener('click',function(){ $('#nuP').value=genPw(); });
+$('#usrForm').addEventListener('submit',function(e){
+  e.preventDefault(); if(!isAdmin()) return;
+  var u=$('#nuU').value.trim().toLowerCase(), n=$('#nuN').value.trim(), em=$('#nuE').value.trim().toLowerCase(), p=$('#nuP').value, r=$('#nuR').value, er=$('#nuErr');
+  function bad(m){ er.textContent=m; er.hidden=false; }
+  if(!/^[a-z0-9._-]{3,32}$/.test(u)) return bad('Username: 3–32 letters, numbers, dot, dash or underscore.');
+  if(USERS.some(function(x){ return x.u.toLowerCase()===u; })) return bad('That username already exists.');
+  if(String(p).length<5) return bad('Password must be at least 5 characters.');
+  if(em && USERS.some(function(x){ return (x.email||'').toLowerCase()===em; })) return bad('Another user already has that email.');
+  er.hidden=true;
+  var salt=newSalt(), list=cloneUsers(); list.push({u:u,name:n||u,role:r,salt:salt,hash:userHash(salt,p),email:em});
+  savePending(list); renderUsers(); this.reset(); log('Added user '+u);
+  toast('Added '+u+'. Password: '+p+' (share it securely)');
+});
+$('#usrTbl').addEventListener('click',function(e){
+  var b=e.target.closest('[data-usr]'); if(!b||!isAdmin()) return; var u=b.closest('[data-uu]').dataset.uu, list=cloneUsers(), x=list.filter(function(y){ return y.u===u; })[0]; if(!x) return;
+  var act=b.dataset.usr, admins=list.filter(function(y){ return y.role==='admin'&&!y.disabled; }).length;
+  if(act==='reset'){ var p=genPw(); x.salt=newSalt(); x.hash=userHash(x.salt,p); savePending(list); renderUsers(); log('Reset password for '+u); copyText(p); toast('New password for '+u+': '+p+' (copied)'); return; }
+  if(act==='role'){ if(x.role==='admin' && admins<=1) return toast('Keep at least one admin'); x.role=x.role==='admin'?'user':'admin'; }
+  if(act==='toggle'){ if(!x.disabled && x.role==='admin' && admins<=1) return toast('Keep at least one admin'); x.disabled=!x.disabled; }
+  if(act==='remove'){ if(x.role==='admin' && admins<=1) return toast('Keep at least one admin'); if(b.dataset.arm!=='1'){ b.dataset.arm='1'; b.textContent='Click to confirm'; setTimeout(function(){ b.dataset.arm=''; b.textContent='Remove'; },3000); return; } list=list.filter(function(y){ return y!==x; }); }
+  savePending(list); renderUsers(); log('Updated user '+u);
+});
+$('#usrBanner').addEventListener('click',function(e){ if(e.target.closest('[data-usr=discard]')){ try{ localStorage.removeItem('p1lp.v10.users.pending'); }catch(_){ } USERS=BUILTIN_USERS.slice(); USERS_SRC='built-in'; loadPublishedUsers().then(renderUsers); toast('Unpublished changes discarded'); } });
+$('#usrDownload').addEventListener('click',function(){
+  var json=JSON.stringify({version:1, updated:new Date().toISOString(), updatedBy:USER.u, users:USERS},null,2);
+  try{ var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([json],{type:'application/json'})); a.download='users.json'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); toast('users.json downloaded. Upload it to the GitHub repo next to index.html'); log('Downloaded users.json'); }catch(_){ toast('Download not available here'); }
+});
+
 /* ---------------- identity / SSO ---------------- */
 function ssoConfigured(){ return !!(SSO_CONFIG.tenantId && SSO_CONFIG.clientId); }
 function ssoHostable(){ return /^https?:$/.test(location.protocol); }
@@ -1670,13 +2008,14 @@ function setUser(u){ USER=u; sstore('p1lp.user',JSON.stringify(u)); paintUser();
 function paintUser(){
   var ini=(USER.name||'?').split(/[\s.@]+/).filter(Boolean).slice(0,2).map(function(x){ return x[0].toUpperCase(); }).join('')||'?';
   $('#userAv').textContent=ini; $('#userAv').title=USER.name+(USER.email?' · '+USER.email:'');
-  $('#userNm').innerHTML=esc(USER.name)+'<small>'+(USER.method==='microsoft'?'Microsoft · '+esc(USER.email):'Launchpad login')+'</small>';
+  $('#userNm').innerHTML=esc(USER.name)+'<small>'+(USER.method==='microsoft'?'Microsoft · '+esc(USER.email):(USER.role==='admin'?'Admin · ':'')+esc(USER.u||''))+'</small>';
+  paintAdmin();
   $('#gateUser').textContent=USER.name;
 }
 function paintLoginGate(){
   var on=ssoConfigured(), local=!on||SSO_CONFIG.allowLocalLogin!==false;
   $('#localLogin').hidden=!local; $('#loginOr').hidden=!local;
-  $('#loginSub').textContent=on?(local?'Sign in with your work Microsoft account, or use your Launchpad credentials.':'Sign in with your work Microsoft account.'):'Use your Launchpad credentials to continue. Microsoft sign-in is ready once IT configures it.';
+  $('#loginSub').textContent=on?(local?'Sign in with your work Microsoft account, or use your Launchpad username and password.':'Sign in with your work Microsoft account.'):'Use your Launchpad username and password. Microsoft sign-in is ready once IT configures it.';
 }
 $('#msLogin').addEventListener('click',async function(){
   var note=$('#msNote'); note.hidden=false;
@@ -1688,7 +2027,9 @@ $('#msLogin').addEventListener('click',async function(){
     var res=await app.loginPopup({ scopes:['User.Read'], prompt:'select_account' });
     var acc=res.account||{}, email=(acc.username||'').toLowerCase(), dom=email.split('@')[1]||'';
     if(SSO_CONFIG.allowedDomains.length && SSO_CONFIG.allowedDomains.map(function(d){ return d.toLowerCase(); }).indexOf(dom)<0){ note.innerHTML='<b>'+esc(email)+'</b> is not an allowed account for Launchpad.'; return; }
-    setUser({ name:acc.name||email, email:email, method:'microsoft', id:acc.homeAccountId||'' });
+    var mapped=USERS.filter(function(x){ return !x.disabled && x.email && x.email.toLowerCase()===email; })[0];
+    if(!mapped){ note.innerHTML='<b>'+esc(email)+'</b> is not set up in Launchpad yet. Ask an admin to add your email to your user in the Users tab.'; return; }
+    setUser({ u:mapped.u, name:acc.name||mapped.name||email, email:email, role:mapped.role||'user', method:'microsoft', id:acc.homeAccountId||'' });
     note.hidden=true; sstore('p1lp.auth','1'); log('Signed in with Microsoft as '+email); showGate('wb');
   }catch(err){ note.innerHTML='<b>Microsoft sign-in did not complete.</b> '+esc(err&&err.errorMessage||err&&err.message||String(err)); }
 });
@@ -1696,7 +2037,8 @@ $('#loginForm').addEventListener('submit',function(e){
   e.preventDefault();
   var u=$('#lgUser').value.trim(), p=$('#lgPass').value;
   if(ssoConfigured() && SSO_CONFIG.allowLocalLogin===false){ return; }
-  if(u.toUpperCase()===LOGIN.user && p===LOGIN.pass){ $('#loginErr').hidden=true; sstore('p1lp.auth','1'); setUser({name:LOGIN.user, email:'', method:'local'}); $('#lgPass').value=''; showGate('wb'); }
+  var acct=findUser(u);
+  if(acct && userHash(acct.salt,p)===acct.hash){ $('#loginErr').hidden=true; sstore('p1lp.auth','1'); setUser({u:acct.u, name:acct.name||acct.u, email:acct.email||'', role:acct.role||'user', method:'local'}); log('Signed in as '+acct.u); $('#lgPass').value=''; showGate('wb'); }
   else { var er=$('#loginErr'); er.textContent='Username or password is incorrect.'; er.hidden=false; var c=$('#loginForm'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); $('#lgPass').select(); }
 });
 $('#wbGrid').addEventListener('submit',function(e){
@@ -1710,7 +2052,7 @@ $('#wbGrid').addEventListener('focusin',function(e){ var c=e.target.closest('.wb
 function signOut(){
   var was=USER.method; sstore('p1lp.auth',null); sstore('p1lp.wb',null); sstore('p1lp.user',null); MFR=null; S=null; C=null;
   if(was==='microsoft' && MSAL){ try{ MSAL.clearCache && MSAL.clearCache(); }catch(_){ } }
-  USER={name:'LGC',email:'',method:'local'}; showGate('login'); paintLoginGate();
+  USER={u:'',name:'',email:'',role:'',method:''}; LOG=[]; showGate('login'); paintLoginGate(); paintAdmin();
 }
 $('#gateSignOut').addEventListener('click',signOut);
 $('#signOut').addEventListener('click',signOut);
@@ -1769,14 +2111,26 @@ $('#instTbl').addEventListener('click',function(e){
   saveState(); renderStep1();
 });
 $('#menuMode').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; UI.menuMode=b.dataset.m; if(UI.menuMode==='pick') UI.pFilter='fit'; renderStep2(); });
-$('#hmText').addEventListener('input',function(){ S.heat.text=this.value; saveState(); });
+function showFamilyQs(){ var f=familiesIn(S.heat.text); $$('#menuPaste [data-fam]').forEach(function(r){ r.hidden=!f[r.dataset.fam]; }); return f; }
+$('#hmText').addEventListener('input',function(){ S.heat.text=this.value; saveState(); clearTimeout(this._t); this._t=setTimeout(showFamilyQs,200); });
 $('#menuPaste').addEventListener('click',function(e){
   var b=e.target.closest('.mc button'); if(b){ S.heat[b.parentNode.dataset.q]=b.dataset.v; saveState(); $$('button',b.parentNode).forEach(function(x){ x.classList.toggle('on',x===b); }); return; }
   var f=e.target.closest('[data-hmf]'); if(f){ UI.hmFilter=f.dataset.hmf; renderHeatOut(); }
+  var mf=e.target.closest('[data-mf]'); if(mf){ UI.mFilter=mf.dataset.mf; renderMatch(); }
+  if(e.target.closest('#mApply')) applyMatchReview();
+});
+$('#menuPaste').addEventListener('change',function(e){
+  var t=e.target, tr=t.closest('[data-mr]'); if(!tr||!S.heat.review) return; var r=S.heat.review.rows[+tr.dataset.mr];
+  if(t.dataset.mo!=null){ r.opts[+t.dataset.mo].on=t.checked; if(r.opts.some(function(o){ return o.on; }) && (r.status==='review'||r.status==='none')) r.status='suggested'; saveState(); var sc=$('.mt-wrap')?$('.mt-wrap').scrollTop:0; renderMatch(); if($('.mt-wrap')) $('.mt-wrap').scrollTop=sc; return; }
+  if(t.hasAttribute('data-madd')){ var v=t.value; var a=assayIndex().filter(function(x){ return x.assay+' — '+x.pn===v; })[0]; if(!a){ toast('Pick an assay from the list'); return; }
+    if(!r.opts.some(function(o){ return o.pid===a.pid&&o.row===a.row; })) r.opts.push({pid:a.pid,row:a.row,assay:a.assay,pn:a.pn,vol:a.vol,src:'manual',score:100,on:true,note:'Added by you'}); else r.opts.forEach(function(o){ if(o.pid===a.pid&&o.row===a.row) o.on=true; });
+    if(r.status==='review'||r.status==='none') r.status='suggested'; saveState(); var sc2=$('.mt-wrap')?$('.mt-wrap').scrollTop:0; renderMatch(); if($('.mt-wrap')) $('.mt-wrap').scrollTop=sc2; }
 });
 $('#hmRun').addEventListener('click',function(){
-  if(!S.heat.csf||!S.heat.urine){ toast('Answer the CSF and urine questions first'); var m=$('.mc[data-q="'+(!S.heat.csf?'csf':'urine')+'"]'); m.classList.remove('shake'); void m.offsetWidth; m.classList.add('shake'); return; }
-  runHeatmap();
+  var fams=showFamilyQs(), need=['csf','urine'].concat(fams.alb?['alb']:[],fams.crea?['crea']:[],fams.alt?['enz']:[]);
+  var miss=need.filter(function(q){ return !S.heat[q]; })[0];
+  if(miss){ toast('Answer the questions above first'); var m=$('.mc[data-q="'+miss+'"]'); m.classList.remove('shake'); void m.offsetWidth; m.classList.add('shake'); return; }
+  buildMatchReview();
 });
 $('#hmClear').addEventListener('click',function(){ S.heat=blankHeat(); saveState(); renderStep2(); });
 $('#pFilter').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; UI.pFilter=b.dataset.f; renderStep2(); });
@@ -1837,7 +2191,7 @@ function colOf(m,prefix){ var p=hkey(prefix); for(var k in m){ if(k.indexOf(p)==
 
 async function exportTemplate(){
   if(!window.ExcelJS){ toast('Excel library not loaded'); return; }
-  var X=window.ExcelJS, wk=new X.Workbook(); wk.creator='Phase 1 Launchpad v9'; wk.created=new Date();
+  var X=window.ExcelJS, wk=new X.Workbook(); wk.creator='Phase 1 Launchpad v10'; wk.created=new Date();
   var TEAL='FF0F7D92', INPUT='FFFFF6D6', LOCK='FFF1F3F7', LINE='FFD9DEE6', REF='FFE2F1F4';
   var thin={style:'thin',color:{argb:LINE}}, box={top:thin,left:thin,bottom:thin,right:thin};
   function head(row,from,to){ for(var i=from||1;i<=(to||row.cellCount);i++){ var c=row.getCell(i); c.font={bold:true,color:{argb:'FFFFFFFF'},size:10}; c.fill={type:'pattern',pattern:'solid',fgColor:{argb:TEAL}}; c.alignment={vertical:'middle',wrapText:true}; c.border=box; } row.height=36; }
@@ -1873,7 +2227,7 @@ async function exportTemplate(){
   /* README */
   var W0=wk.addWorksheet(TPL_SHEETS.start,{properties:{tabColor:{argb:TEAL}}});
   W0.getColumn(1).width=3; W0.getColumn(2).width=118;
-  var lines=[['Phase 1 Launchpad v9 · TVC quote template · READ ME',{bold:true,size:16,color:{argb:TEAL}}],
+  var lines=[['Phase 1 Launchpad v10 · TVC quote template · READ ME',{bold:true,size:16,color:{argb:TEAL}}],
     ['Platform: '+plat+' · workbook '+wb().file.replace(/^[0-9a-f]{8}-/,'')+' · customer: '+(cust||'(not set)')+' · '+labNames.length+' lab(s) · generated '+new Date().toLocaleString(),{size:10,color:{argb:'FF5A6B85'}}],[''],
     ['One file = one customer. The customer can have one or many labs.',{bold:true,size:12}],
     ['Only the yellow cells are editable. Grey cells come from the workbook and are locked. Every sheet lists the valid names on the right; type them exactly or use the dropdowns.'],[''],
@@ -1997,7 +2351,7 @@ async function exportTemplate(){
 
   wk.views=[{activeTab:1}];
   var buf=await wk.xlsx.writeBuffer();
-  var name='Launchpad_v9_TVC_Template_'+plat+'_'+(cust||'customer').replace(/[^\w]+/g,'_')+'.xlsx';
+  var name='Launchpad_v10_TVC_Template_'+plat+'_'+(cust||'customer').replace(/[^\w]+/g,'_')+'.xlsx';
   try{
     var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
     a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },800);
@@ -2005,7 +2359,7 @@ async function exportTemplate(){
   }catch(_){ toast('Download not available here'); }
 }
 
-function saveUploads(){ while(true){ try{ localStorage.setItem('p1lp.v8.uploads.'+MFR, JSON.stringify(UPLOADS)); return; }catch(e){ if(UPLOADS.length>1){ UPLOADS.pop(); } else return; } } }
+function saveUploads(){ while(true){ try{ localStorage.setItem(ukey('uploads.'+MFR), JSON.stringify(UPLOADS)); return; }catch(e){ if(UPLOADS.length>1){ UPLOADS.pop(); } else return; } } }
 
 async function importTemplate(file){
   if(!window.ExcelJS){ toast('Excel library not loaded'); return; }
@@ -2208,21 +2562,23 @@ var TOUR=(function(){
     var P=WB_META[MFR].label;
     steps=[
       {title:'Welcome to Phase 1 Launchpad', body:'<p>This is how you build a Multichem QC quote for <b>one customer</b>, with one or many labs, using the '+P+' TVC workbook. The tour takes about a minute and switches screens for you.</p>'},
-      {sel:'.user', title:'Signed in as you', body:function(){ return USER.method==='microsoft'?'You signed in with your Microsoft work account (<b>'+esc(USER.email)+'</b>). Your name goes on every quote and upload record.':'You\'re signed in with the shared Launchpad login. Once IT turns on <b>Sign in with Microsoft</b>, your own name and email go on every quote and upload record.'; }},
+      {sel:'.user', title:'Signed in as you', body:function(){ return 'You\'re signed in as <b>'+esc(USER.u)+'</b>'+(USER.role==='admin'?' (admin)':'')+'. Your customers, quotes, uploads and logo are saved under your username, so other reps don\'t see them and you don\'t see theirs. Your name goes on every quote you send.'; }},
       {sel:'.ctx', title:'1 · Platform workbook', body:'You unlocked the <b>'+P+'</b> workbook. All products, analyte menus, vial sizes, stability and kit formulas come from it. <b>Switch</b> asks for the other platform\'s password.'},
       {tab:'tvc', step:1, sel:'#labBar', title:'2 · Customer and labs', body:'Type the <b>customer</b> once. Each <b>lab</b> has its own instruments, products and analytes. Use <b>+ Add lab</b> for every site. The number on each lab is its kits per year, and the customer total sits on the right.'},
       {tab:'tvc', step:1, sel:'#tvc-s1 .card', title:'3 · Instrument roster (Step 1)', body:'For the selected lab, add each <b>instrument model</b> and how many of it. Integrated systems count as both chemistry and immunoassay. This decides which products fit and how many instruments each product runs on.'},
-      {tab:'tvc', step:2, sel:'#menuPaste', before:function(){ UI.menuMode='paste'; }, title:'4 · Load the test menu (Step 2)', body:'Paste the lab\'s analyte list from the CE Command Center <b>Assay Heat Map export</b>, answer the CSF and urine questions, and press <b>Generate heatmap</b>. Matching products go into the quote automatically. Or switch to <b>Pick products</b>.'},
-      {tab:'tvc', step:2, sel:'#plist', title:'5 · Products, instrument groups, analytes', body:'Open a product to fine-tune it:<ul><li><b>Instrument groups</b>: each model is calculated separately and then added (e.g. 2 cobas pro + 2 cobas pure).</li><li>Workbook settings: sampling, runs/day, levels…</li><li>Every analyte: Y/N and extra runs.</li></ul>'},
-      {tab:'tvc', step:2, sel:'#tvc-s2 .sticky .card', title:'6 · Order cart', body:'Kits per year for the selected lab, with the <b>customer total across all labs</b> under it. When it looks right, go to <b>Review & export</b>.'},
-      {tab:'tvc', step:3, sel:'#review', before:function(){ UI.rvView='internal'; }, title:'7 · Internal review', body:'For you, not the customer: the <b>customer total</b>, a by-lab summary and combined order lines, then each lab with volume, waste and the assumptions behind every number. Use the lab buttons to look at one lab; <b>Export CSV</b> or <b>Copy summary</b> for your records.'},
-      {tab:'tvc', step:3, sel:'#review', before:function(){ UI.rvView='customer'; }, title:'8 · Customer quote PDF', body:'<b>This is what you hand the customer.</b> A clean quote with your logo, company, quote number, dates and notes (yellow fields are editable), the instruments covered, and the annual order by product code, per lab and in total. No internal volume or waste detail. Press <b>Print / save customer PDF</b>.'},
-      {sel:'#tplExport', title:'9 · Working in Excel instead', body:'<b>Export template</b> downloads an Excel file for this customer with every lab. Fill in the yellow cells. The <b>valid names are listed to the right</b> on every sheet, so models, products and values upload correctly.'},
-      {sel:'#tplUpload', title:'10 · Upload, and uploading again', body:'<b>Upload</b> the filled file (or drag it onto the page).<ul><li><b>Same customer:</b> labs with the same name are <b>replaced</b>, new names are <b>added</b>, other labs are <b>kept</b>.</li><li><b>Different customer:</b> starts a new quote; the old one is saved in Uploads.</li></ul>'},
-      {tab:'uploads', sel:'#pane-uploads .head', title:'11 · Uploads history', body:'Every upload on this device: what came in, which labs it replaced or added, warnings, and the uploaded data. <b>Restore</b> brings an upload back; <b>Undo</b> returns to the quote before it.'},
-      {tab:'ua', sel:'#ua .ua-grid > .card', title:'12 · Urinalysis selector', body:'For KOVA urinalysis controls, answer the customer\'s questions here until a catalog number is recommended. It works the same on both platforms.'},
+      {tab:'tvc', step:2, sel:'#menuPaste', before:function(){ UI.menuMode='paste'; }, title:'4 · Paste the test menu (Step 2)', body:'Paste the lab\'s analyte list from the CE Command Center <b>Assay Heat Map export</b> or from Excel. Optional extra columns: <b>runs/day</b>, <b>days/week</b> and <b>instrument</b>. Answer CSF and urine, plus <b>Albumin BCG/BCP</b>, <b>Creatinine Enzymatic/Jaffé</b> and <b>ALT/AST Activated/Standard</b> when those analytes are in the list, then press <b>Match analytes</b>.'},
+      {tab:'tvc', step:2, sel:'#hmOut', title:'5 · Review the matches', body:'Every pasted line gets the assays it should switch on. Workbook aliases, exact names and method rules are ticked for you. Fuzzy suggestions like <b>ALB → ALBUMIN BCG</b> show a % score. Use <b>Check these</b> to see only the lines that need you, tick the right assay or <b>Find another assay</b>, then <b>Apply to products</b>.'},
+      {tab:'tvc', step:2, sel:'#plist', title:'6 · Products, instrument groups, analytes', body:'Open a product to fine-tune it:<ul><li><b>Instrument groups</b>: each model is calculated separately and then added (e.g. 2 cobas pro + 2 cobas pure).</li><li>Workbook settings: sampling, runs/day, levels…</li><li>Every analyte: Y/N and extra runs.</li></ul>'},
+      {tab:'tvc', step:2, sel:'#tvc-s2 .sticky .card', title:'7 · Order cart', body:'Kits per year for the selected lab, with the <b>customer total across all labs</b> under it. When it looks right, go to <b>Review & export</b>.'},
+      {tab:'tvc', step:3, sel:'#review', before:function(){ UI.rvView='internal'; }, title:'8 · Internal review', body:'For you, not the customer: the <b>customer total</b>, a by-lab summary and combined order lines, then each lab with volume, waste and the assumptions behind every number. Use the lab buttons to look at one lab; <b>Export CSV</b> or <b>Copy summary</b> for your records.'},
+      {tab:'tvc', step:3, sel:'#review', before:function(){ UI.rvView='customer'; }, title:'9 · Customer quote PDF', body:'<b>This is what you hand the customer.</b> A clean quote with your logo, company, quote number, dates and notes (yellow fields are editable), the instruments covered, and the annual order by product code, per lab and in total. No internal volume or waste detail. Press <b>Print / save customer PDF</b>.'},
+      {sel:'#tplExport', title:'10 · Working in Excel instead', body:'<b>Export template</b> downloads an Excel file for this customer with every lab. Fill in the yellow cells. The <b>valid names are listed to the right</b> on every sheet, so models, products and values upload correctly.'},
+      {sel:'#tplUpload', title:'11 · Upload, and uploading again', body:'<b>Upload</b> the filled file (or drag it onto the page).<ul><li><b>Same customer:</b> labs with the same name are <b>replaced</b>, new names are <b>added</b>, other labs are <b>kept</b>.</li><li><b>Different customer:</b> starts a new quote; the old one is saved in Uploads.</li></ul>'},
+      {tab:'uploads', sel:'#pane-uploads .head', title:'12 · Uploads history', body:'Every upload on this device: what came in, which labs it replaced or added, warnings, and the uploaded data. <b>Restore</b> brings an upload back; <b>Undo</b> returns to the quote before it.'},
+      {tab:'ua', sel:'#ua .ua-grid > .card', title:'13 · Urinalysis selector', body:'For KOVA urinalysis controls, answer the customer\'s questions here until a catalog number is recommended. It works the same on both platforms.'},
+      {admin:true, tab:'users', sel:'#pane-users .grid2', title:'Admins · Users', body:'As an admin you add sales reps here, reset passwords and disable or remove accounts. Changes work in your browser right away. <b>Download users.json</b> and upload it to the GitHub repo next to index.html so they work for everyone.'},
       {tab:'home', title:'You\'re ready', body:'<p>Start with the customer and labs in the Total Volume Calculator, or export a template. You can replay this tour any time from <b>Take the tour</b> at the top.</p>'}
-    ];
+    ].filter(function(st){ return !st.admin || isAdmin(); });
   }
   var el=function(id){ return document.getElementById(id); };
   function place(){
@@ -2254,7 +2610,7 @@ var TOUR=(function(){
     if(target){ var r=target.getBoundingClientRect(); if(r.top<110||r.bottom>innerHeight) window.scrollTo(0,Math.max(0,scrollY+r.top-130)); }
     requestAnimationFrame(function(){ requestAnimationFrame(place); });
   }
-  function start(){ build(); el('tour').hidden=false; try{ localStorage.setItem('p1lp.v8.toured','1'); }catch(_){ } show(0); el('tourNext').focus(); }
+  function start(){ build(); el('tour').hidden=false; try{ localStorage.setItem(ukey('toured'),'1'); }catch(_){ } show(0); el('tourNext').focus(); }
   function end(){ el('tour').hidden=true; }
   el('tourNext').addEventListener('click',function(){ if(i>=steps.length-1) end(); else show(i+1); });
   el('tourPrev').addEventListener('click',function(){ show(i-1); });
@@ -2262,7 +2618,7 @@ var TOUR=(function(){
   document.addEventListener('keydown',function(e){ if(el('tour').hidden) return; if(e.key==='Escape') end(); if(e.key==='ArrowRight') el('tourNext').click(); if(e.key==='ArrowLeft'&&i>0) show(i-1); });
   addEventListener('resize',function(){ if(!el('tour').hidden) place(); });
   addEventListener('scroll',function(){ if(!el('tour').hidden) place(); },{passive:true});
-  return { start:start, seen:function(){ try{ return localStorage.getItem('p1lp.v8.toured')==='1'; }catch(_){ return true; } } };
+  return { start:start, seen:function(){ try{ return localStorage.getItem(ukey('toured'))==='1'; }catch(_){ return true; } } };
 })();
 $('#tourBtn').addEventListener('click',function(){ TOUR.start(); });
 
@@ -2402,9 +2758,13 @@ var UA=(function(){
 try{ var su=JSON.parse(sload('p1lp.user')||'null'); if(su) USER=su; }catch(_){ }
 paintUser(); paintLoginGate();
 if(ssoConfigured() && ssoHostable()) msalReady().catch(function(){});
-if(sload('p1lp.auth')==='1'){ var w=sload('p1lp.wb'); if(w&&KB[w]) openWorkbook(w); else showGate('wb'); }
-else showGate('login');
+loadPublishedUsers().then(function(){
+  if(sload('p1lp.auth')==='1' && USER.u && findUser(USER.u)){ var w=sload('p1lp.wb'); if(w&&KB[w]) openWorkbook(w); else showGate('wb'); }
+  else { sstore('p1lp.auth',null); showGate('login'); }
+});
 window.__p1lp={ calc:function(name){ var p=products().filter(function(x){ return x.name===name; })[0]; return p?calc(p):null; }, state:function(){ return S; }, cust:function(){ return C; }, totals:function(){ var t=customerTotals(); return {kits:t.kits, labs:t.labs.map(function(l){ return [l.name,l.kits,l.rows.length]; })}; },
+  match:function(text,ans){ S.heat.text=text; Object.assign(S.heat,ans||{}); buildMatchReview(); return S.heat.review.rows.map(function(r){ return {input:r.input,status:r.status,on:r.opts.filter(function(o){ return o.on; }).map(function(o){ return o.assay+' @ '+o.pn; }),opts:r.opts.slice(0,3).map(function(o){ return o.assay+' ('+o.score+')'; }),runs:r.runs,days:r.days,inst:r.inst}; }); },
+  applyMatch:function(){ applyMatchReview(); return S; },
   heat:function(text,csf,urine){ S.heat.text=text; S.heat.csf=csf; S.heat.urine=urine; runHeatmap(); var ys={}; products().forEach(function(p){ var st=pstate(p); ys[p.sheet]=sheetOf(p).an.filter(function(r){ return st.yn[r[0]]==='Y'; }).map(function(r){ return r[0]; }); }); return {res:S.heat.results, ys:ys}; },
   setProd:function(name,cfg,yn,add){ var p=products().filter(function(x){ return x.name===name; })[0]; var st=pstate(p); Object.assign(st.cfg,cfg); if(yn) st.yn=yn; if(add) st.add=add; return calc(p); } };
 })();
